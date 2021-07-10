@@ -1,4 +1,4 @@
-package com.in3des.springlesson.entity;
+package web.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;

@@ -1,4 +1,4 @@
-package com.in3des.springlesson.config;
+package web.config;
 
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;

@@ -1,10 +1,10 @@
-package com.in3des.springlesson.service;
+package web.dao;
 
-import com.in3des.springlesson.entity.Person;
+import web.entity.Person;
 
 import java.util.List;
 
-public interface PeopleService {
+public interface PersonDAO {
 
     public List<Person> index();
 
@@ -15,4 +15,7 @@ public interface PeopleService {
     public void update(Person updatedPerson, Long id);
 
     public void delete(Long id);
+
+
 }
+

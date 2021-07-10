@@ -1,6 +1,6 @@
-package com.in3des.springlesson.dao;
+package web.dao;
 
-import com.in3des.springlesson.entity.Person;
+import web.entity.Person;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
