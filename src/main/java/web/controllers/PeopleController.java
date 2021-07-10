@@ -26,25 +26,25 @@ public class PeopleController {
         this.personDAO = personDAO;
     }
 
-    @GetMapping("people")
+    @GetMapping("/people")
     public String index(Model model) {
         model.addAttribute("people", personDAO.index());
         return "people/index";
     }
 
-    @GetMapping("people/{id}")
+    @GetMapping("/people/{id}")
     public String show(@PathVariable("id") Long id, Model model) {
         model.addAttribute("person", personDAO.show(id));
         return "people/show";
     }
 
-    @GetMapping("people/new")
+    @GetMapping("/people/new")
     public String newPerson(@ModelAttribute("person") Person person) {
         return "people/new";
     }
 
 
-    @PostMapping("people")
+    @PostMapping("/people")
     public String createPerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -55,7 +55,7 @@ public class PeopleController {
         return "redirect:/people";
     }
 
-    @GetMapping("people/{id}/edit")
+    @GetMapping("/people/{id}/edit")
     public String edit(@PathVariable("id") Long id, Model model) {
         model.addAttribute("person", personDAO.show(id));
         return "people/edit";
@@ -73,13 +73,13 @@ public class PeopleController {
         return "redirect:/people";
     }
 
-    @DeleteMapping("people/{id}")
+    @DeleteMapping("/people/{id}")
     public String delete(@PathVariable("id") Long id) {
         personDAO.delete(id);
         return "redirect:/people";
     }
 
-    @RequestMapping(value = "pages/hello", method = RequestMethod.GET)
+    @RequestMapping(value = "hello", method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
         List<String> messages = new ArrayList<>();
         messages.add("Hello!");
@@ -89,7 +89,7 @@ public class PeopleController {
         return "hello";
     }
 
-    @RequestMapping(value = "pages/login", method = RequestMethod.GET)
+    @RequestMapping(value = "login", method = RequestMethod.GET)
     public String loginPage() {
         return "login";
     }
