@@ -1,5 +1,7 @@
 package web.entity;
 
+import web.model.Role;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
@@ -33,6 +35,11 @@ public class Person {
     @Email
 //    @Size(min = 2, max = 30, message = "Please correct email size")
     private String email;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "role", nullable = false)
+//    @NotEmpty(message = "Role field should not be blank")
+    private Role role;
 
     public Person() {}
 
@@ -74,5 +81,13 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

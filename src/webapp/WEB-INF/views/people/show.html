@@ -6,22 +6,29 @@
 </head>
 <body>
 
-<p th:text="'id : &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + ${person.getId()}"></p>
-<p th:text="'name : &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + ${person.getName()}"></p>
-<p th:text="'surname : &nbsp&nbsp' + ${person.getSurname()}"></p>
-<p th:text="'age : &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + ${person.getAge()}"></p>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>SURNAME</th>
+        <th>AGE</th>
+        <th>EMAIL</th>
+        <th>ROLE</th>
+    </tr>
+    <tr>
+        <td th:utext="${person.getId()}">..</td>
+        <td th:utext="${person.getName()}">..</td>
+        <td th:utext="${person.getSurname()}">..</td>
+        <td th:utext="${person.getAge()}">..</td>
+        <td th:utext="${person.getEmail()}">..</td>
+        <td th:utext="${person.getRole()}">..</td>
+    </tr>
 
 
-<br>
-<!--<a th:href="@{/people/{id}/edit(id=${person.getId()})}">Edit person data</a>-->
-<form th:action="@{/people/{id}/edit(id=${person.getId()})}">
-    <input type="submit" value="EDIT"/>
-</form>
+</table>
 
-<br>
-<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
-    <input type="submit" value="DELETE"/>
-</form>
+
+
 
 
 </body>

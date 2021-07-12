@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PATCH, "/people/**").hasAnyRole(Role.ADMIN.name())
                 .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole(Role.ADMIN.name())
 //                .antMatchers("/hello").access("hasAnyRole('ADMIN')").anyRequest().authenticated();
-                .antMatchers("/people").access("hasAnyRole('ADMIN')")
+                .antMatchers("/admin").access("hasAnyRole('ADMIN')")
                 .anyRequest()
                 .authenticated();
     }

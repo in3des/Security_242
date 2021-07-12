@@ -23,7 +23,45 @@
     <input type="text" th:field="*{email}" id="email"/>
     <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
     <br>
+    <label for="role">Enter role: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </label>
+    <input type="text" th:field="*{role}" id="role"/>
+    <div style="color:red" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></div>
+    <br>
     <input type="submit" value="Save!"/>
+</form>
+
+retyreyrtuyu
+
+<!--<div>-->
+<!--    <select required type="text" multiple id="sel2" name="roles">-->
+<!--        <option value="2">ADMIN</option>-->
+<!--        <option value="1">USER</option>-->
+<!--    </select>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--<select th:field="*{role}">-->
+<!--    <option th:value="'ADMIN'" th:text="ADMIN"></option>-->
+<!--    <option th:value="'USER'" th:text="USER"></option>-->
+<!--</select>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--<select th:field="*{role}">-->
+<!--    <option value="">Select Country</option>-->
+<!--    <option th:each="role : ${role}" th:value="${role}" th:text="${role}"></option>-->
+<!--</select>-->
+<!--</div>-->
+
+<!--<ul>-->
+<!--    <li th:each="role : ${role}">-->
+<!--        <input type="checkbox" name="sel_roles" th:field="*{role}" th:value="${role}" th:text="${role}" />-->
+<!--    </li>-->
+<!--</ul>-->
+
+<br>
+<form th:action="@{/logout}">
+    <input type="submit" value="LOGOUT"/>
 </form>
 
 </body>
