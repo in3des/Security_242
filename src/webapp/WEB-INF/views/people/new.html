@@ -59,6 +59,13 @@ retyreyrtuyu
 <!--    </li>-->
 <!--</ul>-->
 
+<!--<th:block th:each="role: ${listRoles}">-->
+<!--    <input type="checkbox" th:field="*{roles}"-->
+<!--           th:text="${role.role}"-->
+<!--           th:value="${role.id}" />-->
+<!--</th:block>-->
+
+
 <br>
 <form th:action="@{/logout}">
     <input type="submit" value="LOGOUT"/>

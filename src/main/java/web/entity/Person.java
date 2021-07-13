@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Table(name="person")
@@ -36,10 +37,15 @@ public class Person {
 //    @Size(min = 2, max = 30, message = "Please correct email size")
     private String email;
 
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "role", nullable = false)
-//    @NotEmpty(message = "Role field should not be blank")
-    private Role role;
+//    @Enumerated(value = EnumType.STRING)
+//    @Column(name = "role", nullable = false)
+////    @NotEmpty(message = "Role field should not be blank")
+//    private Role role;
+
+    @ManyToMany
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     public Person() {}
 
@@ -83,11 +89,20 @@ public class Person {
         this.email = email;
     }
 
-    public Role getRole() {
-        return role;
+//    public Role getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(Role role) {
+//        this.role = role;
+//    }
+
+
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

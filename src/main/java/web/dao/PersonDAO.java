@@ -1,10 +1,11 @@
 package web.dao;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import web.entity.Person;
 
 import java.util.List;
 
-public interface PersonDAO {
+public interface PersonDAO{
 
     public List<Person> index();
 
