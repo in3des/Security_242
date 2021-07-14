@@ -3,16 +3,19 @@ package web.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import web.config.handler.LoginSuccessHandler;
+import web.service.UserDetailsServiceImpl;
 //import web.service.UserService;
 
 @Configuration
@@ -26,10 +29,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        this.userService = userService;
 //    }
 
+
+    @Bean
+    public UserDetailsService userDetailsService(){
+        return new UserDetailsServiceImpl();
+    }
+
     @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
-        auth.inMemoryAuthentication().withUser("USER").password("USER").roles("USER");
+//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
+//        auth.inMemoryAuthentication().withUser("USER").password("USER").roles("USER");
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(daoAuthenticationProvider());
     }
 
     @Override
@@ -68,7 +79,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers(HttpMethod.PATCH, "/people/**").hasAnyRole(Role.ADMIN.name())
 //                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole(Role.ADMIN.name())
 //                .antMatchers("/hello").access("hasAnyRole('ADMIN')").anyRequest().authenticated();
-                .antMatchers("/admin").access("hasAnyRole('ADMIN')")
+
+//                .antMatchers("/admin").access("hasAnyRole('ADMIN')")
+
+                .antMatchers("/admin").hasAnyAuthority("ADMIN")
+                .antMatchers("/edit").hasAnyAuthority("ADMIN")
+                .antMatchers("/show").hasAnyAuthority("ADMIN", "USER")
+
                 .anyRequest()
                 .authenticated();
     }
@@ -79,12 +96,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public DaoAuthenticationProvider daoAuthenticationProvider() {
-//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-//        authenticationProvider.setPasswordEncoder(passwordEncoder());
-//        authenticationProvider.setUserDetailsService(userService);
-//
-//        return authenticationProvider;
-//    }
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        authenticationProvider.setUserDetailsService(userDetailsService());
+
+        return authenticationProvider;
+    }
 }
