@@ -1,22 +1,30 @@
 package web.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.BeanDefinitionDsl;
-import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import web.config.handler.LoginSuccessHandler;
-import web.model.Role;
+//import web.service.UserService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+//    private UserService userService;
+//
+//    @Autowired
+//    public void setUserService(UserService userService) {
+//        this.userService = userService;
+//    }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -55,10 +63,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
                 // защищенные URL
-                .antMatchers(HttpMethod.GET, "/people/**").hasAnyRole(Role.ADMIN.name(), Role.USER.name())
-                .antMatchers(HttpMethod.POST, "/people/**").hasAnyRole(Role.ADMIN.name())
-                .antMatchers(HttpMethod.PATCH, "/people/**").hasAnyRole(Role.ADMIN.name())
-                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole(Role.ADMIN.name())
+//                .antMatchers(HttpMethod.GET, "/people/**").hasAnyRole(Role.ADMIN.name(), Role.USER.name())
+//                .antMatchers(HttpMethod.POST, "/people/**").hasAnyRole(Role.ADMIN.name())
+//                .antMatchers(HttpMethod.PATCH, "/people/**").hasAnyRole(Role.ADMIN.name())
+//                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole(Role.ADMIN.name())
 //                .antMatchers("/hello").access("hasAnyRole('ADMIN')").anyRequest().authenticated();
                 .antMatchers("/admin").access("hasAnyRole('ADMIN')")
                 .anyRequest()
@@ -68,5 +76,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
+//        return new BCryptPasswordEncoder();
     }
+
+//    @Bean
+//    public DaoAuthenticationProvider daoAuthenticationProvider() {
+//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+//        authenticationProvider.setPasswordEncoder(passwordEncoder());
+//        authenticationProvider.setUserDetailsService(userService);
+//
+//        return authenticationProvider;
+//    }
 }

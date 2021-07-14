@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import web.entity.Person;
 import web.service.PeopleService;
+//import web.service.UserService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -18,6 +19,12 @@ import java.util.List;
 @RequestMapping("/")
 //@RequestMapping("/people")
 public class PeopleController {
+//    private UserService userService;
+//
+//    @Autowired
+//    public void setUserService(UserService userService) {
+//        this.userService = userService;
+//    }
 
     private final PeopleService personDAO;
 

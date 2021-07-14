@@ -19,9 +19,13 @@
     <input type="text" th:field="*{age}" id="age"/>
     <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
     <br>
-    <label for="age">Enter email: &nbsp&nbsp&nbsp </label>
+    <label for="email">Enter email: &nbsp&nbsp&nbsp </label>
     <input type="text" th:field="*{email}" id="email"/>
     <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+    <br>
+    <label for="password">Enter password: </label>
+    <input type="text" th:field="*{password}" id="password"/>
+    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
     <br>
     <label for="role">Enter role: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </label>
     <input type="text" th:field="*{role}" id="role"/>
