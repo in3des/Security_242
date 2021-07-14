@@ -27,7 +27,7 @@
         <td th:utext="${person.getAge()}">..</td>
         <td th:utext="${person.getEmail()}">..</td>
         <td th:utext="${person.getPassword()}">..</td>
-        <td th:utext="${person.getRole()}">..</td>
+        <td th:utext="${person.getRoles()}">..</td>
         <td>
             <form th:action="@{/people/{id}/edit(id=${person.getId()})}">
                 <input type="submit" value="EDIT"/>

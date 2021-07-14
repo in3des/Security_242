@@ -45,17 +45,27 @@ public class Person implements UserDetails {
     @Size(min = 4, max = 30, message = "Please correct password size")
     private String password;
 
-//    @Enumerated(value = EnumType.STRING)
-    @Column(name = "role", nullable = false)
-//    @NotEmpty(message = "Role field should not be blank")
-    private String role;
+////    @Enumerated(value = EnumType.STRING)
+//    @Column(name = "role", nullable = false)
+////    @NotEmpty(message = "Role field should not be blank")
+//    private String role;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id"))
-//    private Set<Role> roles = new HashSet<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     public Person() {}
+
+    public Person(Long id, String name, String surname, int age, String email, String password, Set<Role> roles) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
 
     public Long getId() {
         return id;
@@ -97,30 +107,26 @@ public class Person implements UserDetails {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-
-//    public Set<Role> getRoles() {
-//        return roles;
+//    public String getRole() {
+//        return role;
 //    }
 //
-//    public void setRoles(Set<Role> roles) {
-//        this.roles = roles;
+//    public void setRole(String role) {
+//        this.role = role;
 //    }
+
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     @Override
@@ -146,6 +152,10 @@ public class Person implements UserDetails {
     @Override
     public boolean isEnabled() {
         return false;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {

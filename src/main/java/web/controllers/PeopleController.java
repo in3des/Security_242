@@ -59,7 +59,7 @@ public class PeopleController {
         }
 
         personDAO.save(person);
-        return "redirect:/people";
+        return "redirect:/admin";
     }
 
     @GetMapping("/people/{id}/edit")
@@ -77,13 +77,13 @@ public class PeopleController {
         }
 
         personDAO.update(person, id);
-        return "redirect:/people";
+        return "redirect:/admin";
     }
 
     @DeleteMapping("/people/{id}")
     public String delete(@PathVariable("id") Long id) {
         personDAO.delete(id);
-        return "redirect:/people";
+        return "redirect:/admin";
     }
 
     @RequestMapping(value = "hello", method = RequestMethod.GET)
