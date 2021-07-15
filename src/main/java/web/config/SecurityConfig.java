@@ -22,12 +22,12 @@ import web.config.handler.LoginSuccessHandler;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    private UserService userService;
-//
-//    @Autowired
-//    public void setUserService(UserService userService) {
-//        this.userService = userService;
-//    }
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    public void setUserService(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
 
 //    @Bean
@@ -37,8 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
-        auth.inMemoryAuthentication().withUser("USER").password("USER").roles("USER");
+//        auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
+//        auth.inMemoryAuthentication().withUser("USER").password("USER").roles("USER");
+        auth.userDetailsService(userDetailsService);
     }
 
 //    @Override

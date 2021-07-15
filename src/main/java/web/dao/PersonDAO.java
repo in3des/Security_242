@@ -17,6 +17,8 @@ public interface PersonDAO{
 
     public void delete(Long id);
 
+    Person findPersonByEmail(String email);
+
 
 }
 

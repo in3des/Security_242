@@ -119,22 +119,22 @@ public class Person implements UserDetails {
         this.roles = roles;
     }
 
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return getRoles();
-//    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<Role> roles = getRoles();
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-
-        for (Role r:roles) {
-            authorities.add(new SimpleGrantedAuthority(r.getRole()));
-        }
-
-        return authorities;
+        return getRoles();
     }
+
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        Set<Role> roles = getRoles();
+//        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+//
+//        for (Role r:roles) {
+//            authorities.add(new SimpleGrantedAuthority(r.getRole()));
+//        }
+//
+//        return authorities;
+//    }
 
     @Override
     public String getUsername() {
