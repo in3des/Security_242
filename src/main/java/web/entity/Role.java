@@ -1,28 +1,5 @@
 package web.entity;
 
-//import java.util.Set;
-//import java.util.stream.Collectors;
-//import java.util.stream.Stream;
-//
-//public enum Role {
-////    Java 9
-////    USER(Set.of(Permission.PEOPLE_READ)),
-////    ADMIN(Set.of(Permission.PEOPLE_WRITE, Permission.PEOPLE_READ));
-//
-//    USER(Stream.of(Permission.PEOPLE_READ).collect(Collectors.toSet())),
-//    ADMIN(Stream.of(Permission.PEOPLE_READ, Permission.PEOPLE_WRITE).collect(Collectors.toSet()));
-//
-//    final private Set<Permission> permissionSet;
-//
-//    Role(Set<Permission> permissionSet) {
-//        this.permissionSet = permissionSet;
-//    }
-//
-//    public Set<Permission> getPermissionSet() {
-//        return permissionSet;
-//    }
-//}
-
 import org.springframework.security.core.GrantedAuthority;
 import web.entity.Person;
 
