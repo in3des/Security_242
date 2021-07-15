@@ -28,18 +28,21 @@
     <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
     <br>
     <label for="role">Enter role: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </label>
-    <select class="form-control" multiple name="listRoles" id="role"
-            size="1">
-        <option selected name="ROLE_USER" value="ROLE_USER">USER</option>
-        <option name="ROLE_ADMIN" value="ROLE_ADMIN">ADMIN</option>
+
+<!--    manual ok-->
+<!--    <input type="text" th:field="*{roles}" id="role"/>-->
+<!--    <div style="color:red" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>-->
+
+    <select th:field="*{roles}" id="role">
+        <option th:value="'ROLE_ADMIN'" th:text="ADMIN"></option>
+        <option th:value="'ROLE_USER'" th:text="USER"></option>
     </select>
-<!--    <input type="text" th:field="*{role}" id="role"/>-->
-<!--    <div style="color:red" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></div>-->
-    <br>
+
+    <br><br>
     <input type="submit" value="Save!"/>
 </form>
 
-retyreyrtuyu
+
 
 <!--<div>-->
 <!--    <select required type="text" multiple id="sel2" name="roles">-->

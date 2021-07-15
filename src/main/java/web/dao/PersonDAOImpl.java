@@ -36,6 +36,8 @@ public class PersonDAOImpl implements PersonDAO {
         person.setSurname(updatedPerson.getSurname());
         person.setAge(updatedPerson.getAge());
         person.setEmail(updatedPerson.getEmail());
+        person.setPassword(updatedPerson.getPassword());
+        person.setRoles(updatedPerson.getRoles());
         em.merge(person);
     }
 

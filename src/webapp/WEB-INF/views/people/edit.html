@@ -30,12 +30,13 @@
     <label for="role">Enter role: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </label>
 <!--    <input type="text" th:field="*{role}" id="role"/>-->
 <!--    <div style="color:red" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></div>-->
-    <select class="form-control" multiple name="listRoles" id="role"
-            size="1">
-        <option name="ROLE_USER" value="ROLE_USER">USER</option>
-        <option name="ROLE_ADMIN" value="ROLE_ADMIN">ADMIN</option>
+
+    <select th:field="*{roles}" id="role">
+        <option th:value="'ROLE_ADMIN'" th:text="ADMIN"></option>
+        <option th:value="'ROLE_USER'" th:text="USER"></option>
     </select>
-    <br>
+
+    <br><br>
     <input type="submit" value="Update!"/>
 </form>
 
