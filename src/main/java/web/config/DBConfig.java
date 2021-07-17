@@ -34,21 +34,6 @@ public class DBConfig {
         return dataSource;
     }
 
-//    @Bean
-//    public LocalContainerEntityManagerFactoryBean getLocalContainerEntityManagerFactoryBean() {
-//        HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
-//        hibernateJpaVendorAdapter.setGenerateDdl(true);
-//        hibernateJpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL8Dialect");
-//        hibernateJpaVendorAdapter.setShowSql(true);
-//        LocalContainerEntityManagerFactoryBean emf =
-//                new LocalContainerEntityManagerFactoryBean();
-//        emf.setJpaVendorAdapter(hibernateJpaVendorAdapter);
-//        emf.setDataSource(dataSource());
-//        emf.setPackagesToScan("com.in3des.springlesson.entity");
-//        emf.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-//        return emf;
-//    }
-
     @Bean
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
@@ -77,65 +62,7 @@ public class DBConfig {
 
         return properties;
     }
-//
-//    @Bean
-//    public JpaTransactionManager transactionManager() {
-////    public PlatformTransactionManager transactionManager() {
-//        JpaTransactionManager transactionManager = new JpaTransactionManager();
-//        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
-//
-//        return transactionManager;
-//    }
 
-//    private Properties getHibernateProperties() {
-//        Properties properties = new Properties();
-//        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("hibernate.properties");
-//        try {
-//            properties.load(inputStream);
-//            return properties;
-//        } catch (IOException e) {
-//            throw new IllegalArgumentException("cannot find 'hibernate.properties' in classpath", e);
-//        }
-//    }
-
-
-
-//    @Bean
-//    public PlatformTransactionManager transactionManager() {
-//        JpaTransactionManager transactionManager = new JpaTransactionManager();
-//        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
-//
-//        return transactionManager;
-//    }
-
-//    @Bean
-//    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
-//        return new PersistenceExceptionTranslationPostProcessor();
-//    }
-
-
-
-//    @Bean
-//    public LocalContainerEntityManagerFactoryBean getLocalContainerEntityManagerFactoryBean() {
-//        HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
-//        hibernateJpaVendorAdapter.setGenerateDdl(true);
-//        hibernateJpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL8Dialect");
-//        hibernateJpaVendorAdapter.setShowSql(true);
-//        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
-//                new LocalContainerEntityManagerFactoryBean();
-//        entityManagerFactoryBean.setJpaVendorAdapter(hibernateJpaVendorAdapter);
-//        entityManagerFactoryBean.setDataSource(dataSource());
-//        entityManagerFactoryBean.setPackagesToScan("com.in3des.springlesson");
-//        entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-//        return entityManagerFactoryBean;
-//    }
-
-
-
-//    @Bean
-//    public PersistenceExceptionTranslationPostProcessor persistenceExceptionTranslationPostProcessor() {
-//        return new PersistenceExceptionTranslationPostProcessor();
-//    }
 
 
 }

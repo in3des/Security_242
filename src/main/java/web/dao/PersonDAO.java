@@ -1,6 +1,5 @@
 package web.dao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import web.entity.Person;
 
 import java.util.List;
@@ -18,6 +17,10 @@ public interface PersonDAO{
     public void delete(Long id);
 
     public Person findPersonByEmail(String email);
+
+    public Person findPersonByName(String email);
+
+
 
 
 }

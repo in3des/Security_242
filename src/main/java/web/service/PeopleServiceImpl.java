@@ -54,4 +54,10 @@ public class PeopleServiceImpl implements PeopleService {
         return personDAO.findPersonByEmail(email);
     }
 
+    @Override
+    @Transactional
+    public Person findPersonByName(String name) {
+        return personDAO.findPersonByName(name);
+    }
+
 }

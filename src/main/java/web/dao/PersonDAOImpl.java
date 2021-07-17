@@ -52,6 +52,11 @@ public class PersonDAOImpl implements PersonDAO {
         return em.createQuery("FROM Person p WHERE p.email =:email", Person.class).setParameter("email", email).getSingleResult();
     }
 
+    @Override
+    public Person findPersonByName(String name) {
+        return em.createQuery("FROM Person p WHERE p.name =:name", Person.class).setParameter("name", name).getSingleResult();
+    }
+
 
 }
 

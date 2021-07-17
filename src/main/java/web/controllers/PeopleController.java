@@ -1,6 +1,7 @@
 package web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -8,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import web.entity.Person;
 import web.service.PeopleService;
-//import web.service.UserService;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 @Controller
 @RequestMapping("/")
-//@RequestMapping("/people")
 public class PeopleController {
 
     private final PeopleService peopleService;
@@ -29,34 +29,74 @@ public class PeopleController {
     }
 
     @GetMapping("/admin")
-    public String showIndexPage(Model model) {
+    public String showIndexPage(Model model, Principal principal) {
+        System.out.println("simple - " + principal.getName());
         model.addAttribute("people", peopleService.index());
         return "people/index";
     }
 
-////    @GetMapping("/people/{id}")
 //    @GetMapping("/user/{id}")
-//    @PreAuthorize("hasAnyRole('ROLE_USER')")
-//    public String show(@PathVariable("id") Long id, Model model) {
+//    public String showOneUserPage(@PathVariable("id") Long id, Model model) {
 //        model.addAttribute("person", peopleService.show(id));
 //        return "people/show";
 //    }
 
+//    @GetMapping("/user")
+//    public String showOneUserPage(Model model, Principal principal) throws NoSuchFieldException {
+//        System.out.println("principal.getName() ---> " + principal.getName());
+//        System.out.println("Authentication  --> " + SecurityContextHolder.getContext().getAuthentication().getName());
+//
+////        try {
+////            principal.getClass().getField("email").setAccessible(true);
+//////            String email  = principal.getClass().getField("НазваниеПоля").toString();
+////            String email  = principal.getClass().getField("email").toString();
+////            System.out.println("clean --> " + principal.getClass().getField("email").toString());
+////            principal.getClass().getField("email").setAccessible(true);
+////            System.out.println("inside try");
+////            System.out.println("gjgsnrf -->" + email);
+////            System.out.println("clean --> " + principal.getClass().getField("email").toString());
+////        } catch (NoSuchFieldException e) {
+////            e.printStackTrace();
+////        }
+////
+////        System.out.println("test test test");
+////        System.out.println("clean --> " + principal.getClass().getField("email").toString());
+//
+//
+//
+////        System.out.println("full - " + peopleService.findPersonByEmail(principal.getName()));
+//
+//        model.addAttribute("person", peopleService.findPersonByName(principal.getName()));
+//
+//        return "people/show";
+//    }
+
     @GetMapping("/user")
-    public String showOneUserPage(Model model, Principal principal) {
-        model.addAttribute("person", peopleService.findPersonByEmail(principal.getName()));
+    public String showOneUserPage(Model model, Authentication authentication) throws NoSuchFieldException {
+//        Person person = (Person) authentication.getPrincipal();
+//        model.addAttribute("person", peopleService.findPersonByEmail(person.getEmail()));
+        model.addAttribute("person", peopleService.findPersonByEmail(((Person) authentication.getPrincipal()).getEmail()));
         return "people/show";
     }
 
+//    @RequestMapping(value = "/user", method = RequestMethod.GET)
+//    public ModelAndView showOneUserPage(Principal principal) {
+//        ModelAndView mav= new ModelAndView("/people/show");
+//        mav.addObject("person", principal);
+//        return mav;
+//    }
 
-//    @GetMapping("/people/new")
+//    @GetMapping("/user")
+//    public String show1(String email, Model model) {
+//        model.addAttribute("person", peopleService.findPersonByEmail(email));
+//        return "people/show";
+//    }
+
     @GetMapping("/admin/new")
     public String showNewPersonPage(@ModelAttribute("person") Person person) {
         return "people/new";
     }
 
-
-//    @PostMapping("/people")
     @PostMapping("/admin")
     public String createPerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
 
@@ -68,14 +108,12 @@ public class PeopleController {
         return "redirect:/admin";
     }
 
-//    @GetMapping("/people/{id}/edit")
     @GetMapping("/admin/{id}/edit")
     public String showEditPersonPage(@PathVariable("id") Long id, Model model) {
         model.addAttribute("person", peopleService.show(id));
         return "people/edit";
     }
 
-//    @PatchMapping("people/{id}")
     @PatchMapping("admin/{id}")
     public String UpdatePerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult,
                          @PathVariable("id") Long id) {
@@ -88,7 +126,6 @@ public class PeopleController {
         return "redirect:/admin";
     }
 
-//    @DeleteMapping("/people/{id}")
     @DeleteMapping("/admin/{id}")
     public String deletePerson(@PathVariable("id") Long id) {
         peopleService.delete(id);

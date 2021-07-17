@@ -17,4 +17,6 @@ public interface PeopleService {
     public void delete(Long id);
 
     public Person findPersonByEmail(String email);
+
+    public Person findPersonByName(String name);
 }

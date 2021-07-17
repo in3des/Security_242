@@ -1,7 +1,6 @@
 package web.entity;
 
 import org.springframework.security.core.GrantedAuthority;
-import web.entity.Person;
 
 import javax.persistence.*;
 import java.util.Set;
