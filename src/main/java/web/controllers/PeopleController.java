@@ -1,6 +1,8 @@
 package web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -11,6 +13,7 @@ import web.service.PeopleService;
 //import web.service.UserService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +22,6 @@ import java.util.List;
 @RequestMapping("/")
 //@RequestMapping("/people")
 public class PeopleController {
-//    private UserService userService;
-//
-//    @Autowired
-//    public void setUserService(UserService userService) {
-//        this.userService = userService;
-//    }
 
     private final PeopleService personDAO;
 
@@ -39,19 +36,30 @@ public class PeopleController {
         return "people/index";
     }
 
-    @GetMapping("/people/{id}")
-    public String show(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("person", personDAO.show(id));
+////    @GetMapping("/people/{id}")
+//    @GetMapping("/user/{id}")
+//    @PreAuthorize("hasAnyRole('ROLE_USER')")
+//    public String show(@PathVariable("id") Long id, Model model) {
+//        model.addAttribute("person", personDAO.show(id));
+//        return "people/show";
+//    }
+
+    @GetMapping("/user")
+    public String show(Model model, Principal principal) {
+        model.addAttribute("person", personDAO.findPersonByEmail(principal.getName()));
         return "people/show";
     }
 
-    @GetMapping("/people/new")
+
+//    @GetMapping("/people/new")
+    @GetMapping("/admin/new")
     public String newPerson(@ModelAttribute("person") Person person) {
         return "people/new";
     }
 
 
-    @PostMapping("/people")
+//    @PostMapping("/people")
+    @PostMapping("/admin")
     public String createPerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -62,13 +70,15 @@ public class PeopleController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/people/{id}/edit")
+//    @GetMapping("/people/{id}/edit")
+    @GetMapping("/admin/{id}/edit")
     public String edit(@PathVariable("id") Long id, Model model) {
         model.addAttribute("person", personDAO.show(id));
         return "people/edit";
     }
 
-    @PatchMapping("people/{id}")
+//    @PatchMapping("people/{id}")
+    @PatchMapping("admin/{id}")
     public String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult,
                          @PathVariable("id") Long id) {
 
@@ -80,7 +90,8 @@ public class PeopleController {
         return "redirect:/admin";
     }
 
-    @DeleteMapping("/people/{id}")
+//    @DeleteMapping("/people/{id}")
+    @DeleteMapping("/admin/{id}")
     public String delete(@PathVariable("id") Long id) {
         personDAO.delete(id);
         return "redirect:/admin";

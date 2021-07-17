@@ -34,7 +34,7 @@ public class Person implements UserDetails {
     @Min(value = 0, message = "Age should be a positive value")
     private int age;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     @NotEmpty(message = "Email field should not be blank")
     @Email
 //    @Size(min = 2, max = 30, message = "Please correct email size")
@@ -123,18 +123,6 @@ public class Person implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
     }
-
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        Set<Role> roles = getRoles();
-//        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-//
-//        for (Role r:roles) {
-//            authorities.add(new SimpleGrantedAuthority(r.getRole()));
-//        }
-//
-//        return authorities;
-//    }
 
     @Override
     public String getUsername() {

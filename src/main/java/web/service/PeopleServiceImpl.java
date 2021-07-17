@@ -47,4 +47,11 @@ public class PeopleServiceImpl implements PeopleService {
     public void delete(Long id) {
         personDAO.delete(id);
     }
+
+    @Override
+    @Transactional
+    public Person findPersonByEmail(String email) {
+        return personDAO.findPersonByEmail(email);
+    }
+
 }

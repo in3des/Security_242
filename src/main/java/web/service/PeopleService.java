@@ -15,4 +15,6 @@ public interface PeopleService {
     public void update(Person updatedPerson, Long id);
 
     public void delete(Long id);
+
+    public Person findPersonByEmail(String email);
 }

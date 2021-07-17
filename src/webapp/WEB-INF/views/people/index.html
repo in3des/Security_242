@@ -29,12 +29,12 @@
         <td th:utext="${person.getPassword()}">..</td>
         <td th:utext="${person.getRoles()}">..</td>
         <td>
-            <form th:action="@{/people/{id}/edit(id=${person.getId()})}">
+            <form th:action="@{/admin/{id}/edit(id=${person.getId()})}">
                 <input type="submit" value="EDIT"/>
             </form>
         </td>
         <td>
-            <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+            <form th:method="DELETE" th:action="@{/admin/{id}(id=${person.getId()})}">
                 <input type="submit" value="DELETE"/>
             </form>
         </td>
@@ -52,7 +52,7 @@
 <hr>
 
 <!--<a th:href="@{/people/new}">create new user</a>-->
-<form th:action="@{/people/new}">
+<form th:action="@{/admin/new}">
     <input type="submit" value="CREATE NEW"/>
 </form>
 <br>

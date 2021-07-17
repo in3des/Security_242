@@ -29,23 +29,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
     }
 
-
-//    @Bean
-//    public UserDetailsService userDetailsService(){
-//        return new UserDetailsServiceImpl();
-//    }
-
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
 //        auth.inMemoryAuthentication().withUser("USER").password("USER").roles("USER");
         auth.userDetailsService(userDetailsService);
     }
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(daoAuthenticationProvider());
-//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -84,9 +73,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole(Role.ADMIN.name())
 //                .antMatchers("/hello").access("hasAnyRole('ADMIN')").anyRequest().authenticated();
 
-                .antMatchers("/admin").access("hasAnyRole('ADMIN')")
-                .antMatchers("/people/{id}").access("hasAnyRole('ADMIN', 'USER')")
-                .antMatchers("/user").access("hasAnyRole('USER')")
+                .antMatchers("/admin/**").access("hasAnyRole('ADMIN')")
+//                .antMatchers("/people/{id}").access("hasAnyRole('ADMIN', 'USER')")
+                .antMatchers("/user/**").access("hasAnyRole('USER')")
 //                .antMatchers("/people/{id}/edit").access("hasAnyRole('ADMIN')")
 //                .antMatchers("/people/new").access("hasAnyRole('ADMIN')")
                 .antMatchers("/people/**").access("hasAnyRole('ADMIN')")
@@ -105,12 +94,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public DaoAuthenticationProvider daoAuthenticationProvider() {
-//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-//        authenticationProvider.setPasswordEncoder(passwordEncoder());
-//        authenticationProvider.setUserDetailsService(userDetailsService());
-//
-//        return authenticationProvider;
-//    }
 }
