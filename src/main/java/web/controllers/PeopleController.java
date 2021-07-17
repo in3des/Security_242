@@ -29,7 +29,7 @@ public class PeopleController {
     }
 
     @GetMapping("/admin")
-    public String index(Model model) {
+    public String showIndexPage(Model model) {
         model.addAttribute("people", peopleService.index());
         return "people/index";
     }
@@ -43,7 +43,7 @@ public class PeopleController {
 //    }
 
     @GetMapping("/user")
-    public String show(Model model, Principal principal) {
+    public String showOneUserPage(Model model, Principal principal) {
         model.addAttribute("person", peopleService.findPersonByEmail(principal.getName()));
         return "people/show";
     }
@@ -51,7 +51,7 @@ public class PeopleController {
 
 //    @GetMapping("/people/new")
     @GetMapping("/admin/new")
-    public String newPerson(@ModelAttribute("person") Person person) {
+    public String showNewPersonPage(@ModelAttribute("person") Person person) {
         return "people/new";
     }
 
@@ -70,14 +70,14 @@ public class PeopleController {
 
 //    @GetMapping("/people/{id}/edit")
     @GetMapping("/admin/{id}/edit")
-    public String edit(@PathVariable("id") Long id, Model model) {
+    public String showEditPersonPage(@PathVariable("id") Long id, Model model) {
         model.addAttribute("person", peopleService.show(id));
         return "people/edit";
     }
 
 //    @PatchMapping("people/{id}")
     @PatchMapping("admin/{id}")
-    public String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult,
+    public String UpdatePerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult,
                          @PathVariable("id") Long id) {
 
         if (bindingResult.hasErrors()) {
@@ -90,7 +90,7 @@ public class PeopleController {
 
 //    @DeleteMapping("/people/{id}")
     @DeleteMapping("/admin/{id}")
-    public String delete(@PathVariable("id") Long id) {
+    public String deletePerson(@PathVariable("id") Long id) {
         peopleService.delete(id);
         return "redirect:/admin";
     }
