@@ -17,6 +17,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private PersonDAO personDAO;
 
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 //        Person person = userRepository.findPersonByEmail(email);
@@ -26,4 +27,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         return person;
     }
+
 }
