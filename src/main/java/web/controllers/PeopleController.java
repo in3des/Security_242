@@ -71,6 +71,12 @@ public class PeopleController {
 //        return "people/show";
 //    }
 
+//    @GetMapping("/user")
+//    public String showOneUserPage(Model model, Principal principal) throws NoSuchFieldException {
+//        model.addAttribute("person", peopleService.findPersonByName(principal.getName()));
+//
+//        return "people/show";
+
     @GetMapping("/user")
     public String showOneUserPage(Model model, Authentication authentication) throws NoSuchFieldException {
 //        Person person = (Person) authentication.getPrincipal();
