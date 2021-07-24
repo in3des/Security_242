@@ -31,14 +31,15 @@ public class PersonDAOImpl implements PersonDAO {
 
     @Override
     public void update(Person updatedPerson, Long id) {
-        Person person = em.find(Person.class, id);
-        person.setName(updatedPerson.getName());
-        person.setSurname(updatedPerson.getSurname());
-        person.setAge(updatedPerson.getAge());
-        person.setEmail(updatedPerson.getEmail());
-        person.setPassword(updatedPerson.getPassword());
-        person.setRoles(updatedPerson.getRoles());
-        em.merge(person);
+//        Person person = em.find(Person.class, id);
+//        person.setName(updatedPerson.getName());
+//        person.setSurname(updatedPerson.getSurname());
+//        person.setAge(updatedPerson.getAge());
+//        person.setEmail(updatedPerson.getEmail());
+//        person.setPassword(updatedPerson.getPassword());
+//        person.setRoles(updatedPerson.getRoles());
+//        em.merge(person);
+        em.merge(updatedPerson);
     }
 
     @Override
