@@ -31,10 +31,18 @@
 <!--    <input type="text" th:field="*{role}" id="role"/>-->
 <!--    <div style="color:red" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></div>-->
 
-    <select th:field="*{roles}" id="role">
-        <option th:value="'ROLE_ADMIN'" th:text="ADMIN"></option>
-        <option th:value="'ROLE_USER'" th:text="USER"></option>
-    </select>
+<!--    <select th:field="*{roles}" id="role">-->
+<!--        <option th:value="'ROLE_ADMIN'" th:text="ADMIN"></option>-->
+<!--        <option th:value="'ROLE_USER'" th:text="USER"></option>-->
+<!--    </select>-->
+
+    <input type="checkbox" th:field="*{roles}" th:text="ADMIN" th:value="'ROLE_ADMIN'">
+    <input type="checkbox" th:field="*{roles}" th:text="USER" th:value="'ROLE_USER'">
+
+<!--    <th:block th:each="role : ${person.getRoles()}">-->
+<!--        <input type="checkbox" name="sel_roles" id="role" th:field="*{roles}" th:value="${role.id}" th:text="${role.role}" />-->
+<!--    </th:block>-->
+
 
     <br><br>
     <input type="submit" value="Update!"/>
