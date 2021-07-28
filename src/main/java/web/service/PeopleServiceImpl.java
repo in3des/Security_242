@@ -16,12 +16,7 @@ public class PeopleServiceImpl implements PeopleService {
     private final PersonDAO personDAO;
 
 //    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
+//    PasswordEncoder passwordEncoder;
 
     @Autowired
     public PeopleServiceImpl(PersonDAO personDAO) {
