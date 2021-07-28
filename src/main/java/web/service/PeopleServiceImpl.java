@@ -1,6 +1,7 @@
 package web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.dao.PersonDAO;
@@ -13,6 +14,14 @@ import java.util.List;
 public class PeopleServiceImpl implements PeopleService {
 
     private final PersonDAO personDAO;
+
+//    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Autowired
     public PeopleServiceImpl(PersonDAO personDAO) {
@@ -32,12 +41,14 @@ public class PeopleServiceImpl implements PeopleService {
     @Override
     @Transactional
     public void save(Person person) {
+//        person.setPassword(passwordEncoder.encode(person.getPassword()));
         personDAO.save(person);
     }
 
     @Override
     @Transactional
     public void update(Person updatedPerson, Long id) {
+//        updatedPerson.setPassword(passwordEncoder.encode(updatedPerson.getPassword()));
         personDAO.update(updatedPerson, id);
     }
 
